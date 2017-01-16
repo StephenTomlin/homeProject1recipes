@@ -1,0 +1,19 @@
+{
+  "name": "recipe_project",
+  "version": "1.0.0",
+  "description": "Simple app that uses OpenOven api and react. Home Project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephenTomlin/homeProject1recipes.git"
+  },
+  "author": "Stephen A. Tomlinson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StephenTomlin/homeProject1recipes/issues"
+  },
+  "homepage": "https://github.com/StephenTomlin/homeProject1recipes#readme"
+}
