@@ -2,5 +2,15 @@ h1 {
   color: white;
 }
 body {
-  background-color: tomato
+  background-color: tomato;
+}
+.recipeCard {
+  background-color: gray;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px 10px 10px 10px;
+  margin-top: 10px;
+}
+.cardContents {
+  margin: 0px;
 }
