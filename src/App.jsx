@@ -7,7 +7,8 @@ class App extends Component {
     super(props);
     this.state = {value: '',
                   recipes:[],
-                  available:[]
+                  available:[],
+                  availableRecipes:[]
                 };
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,9 +31,14 @@ class App extends Component {
     }
   }
   componentDidMount() {
-    fetch(`http://api.yummly.com/v1/api/recipes?_app_id=448f67d9&_app_key=c21a694ca9204f51fa82d8ade53c791b&q=${this.state.available}&requirePictures=true`)
-    .then((response) => response.json())
-    })
+    if (this.state.available.length != 0) {
+      fetch(`http://api.yummly.com/v1/api/recipes?_app_id=448f67d9&_app_key=c21a694ca9204f51fa82d8ade53c791b&q=${this.state.available}&requirePictures=true`)
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({availableRecipes:responseJson.matches});
+        console.log(this.state.availableRecipes)
+      })
+    }
   }
   render() {
     return (
@@ -45,7 +51,7 @@ class App extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <Recipes recipeList={this.state.recipes}/>
+        <Recipes recipeList={this.state.recipes} availableList={this.state.availableRecipes}/>
       </div>
     );
   }
