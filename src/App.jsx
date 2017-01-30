@@ -6,7 +6,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {value: '',
-                  recipes:[]
+                  recipes:[],
+                  available:[]
                 };
 
     this.handleChange = this.handleChange.bind(this);
@@ -27,6 +28,11 @@ class App extends Component {
         console.log(this.state.recipes)
       })
     }
+  }
+  componentDidMount() {
+    fetch(`http://api.yummly.com/v1/api/recipes?_app_id=448f67d9&_app_key=c21a694ca9204f51fa82d8ade53c791b&q=${this.state.available}&requirePictures=true`)
+    .then((response) => response.json())
+    })
   }
   render() {
     return (
