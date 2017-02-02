@@ -43,19 +43,20 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <Navbar/>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Search for Recipes
-            <input type="text" value={this.state.value} onChange={this.handleChange} />
-          </label>
-          <input type="submit" value="Submit" />
-          <Button bsStyle="primary" type="submit">
-            Submit
-          </Button>
-        </form>
-        <Recipes recipeList={this.state.recipes} availableList={this.state.availableRecipes}/>
+      <div className = "container">
+        <div className = "row">
+          <Navbar/>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Search for Recipes
+              <input type="text" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <Button bsStyle="primary" type="submit">
+              Submit
+            </Button>
+          </form>
+          <Recipes recipeList={this.state.recipes} availableList={this.state.availableRecipes}/>
+        </div>
       </div>
     );
   }
