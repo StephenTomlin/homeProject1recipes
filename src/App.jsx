@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from './navBar.jsx';
 import Recipes from './recipeContainer.jsx';
+import { Button } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
@@ -50,6 +51,9 @@ class App extends Component {
             <input type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
           <input type="submit" value="Submit" />
+          <Button bsStyle="primary" type="submit">
+            Submit
+          </Button>
         </form>
         <Recipes recipeList={this.state.recipes} availableList={this.state.availableRecipes}/>
       </div>
