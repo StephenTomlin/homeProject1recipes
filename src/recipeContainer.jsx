@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Media } from 'react-bootstrap';
 
 class Recipes extends Component {
   componentDidMount() {
@@ -13,12 +14,22 @@ class Recipes extends Component {
           {this.props.recipeList.map((item,index)=>(
             <div className ="rowStyle col-sm-4" value={item} key={index}>
               <div className="recipeCard">
-                <h3 className="cardContents">{item.recipeName}</h3>
-                <h4 className="cardContents">{item.totalTimeInSeconds}</h4>
-                <img className="cardContents" src={item.imageUrlsBySize[90]}/>
-                {item.ingredients.map(function (value) {
-                  return <p className="cardContents" key={value}>{value}</p>;
-                })}
+                <Media>
+                  <Media.Left>
+                    <img className="cardContents" src={item.imageUrlsBySize[90]}/>
+                  </Media.Left>
+                  <Media.Body>
+                    <Media.Heading>
+                      <h3 className="cardContents">{item.recipeName}</h3>
+                    </Media.Heading>
+                    <h4 className="cardContents">{item.totalTimeInSeconds}</h4>
+                    <ul>
+                      {item.ingredients.map(function (value) {
+                        return <li className="cardContents" key={value}>{value}</li>;
+                      })}
+                    </ul>
+                  </Media.Body>
+                </Media>
               </div>
             </div>
           ))}
