@@ -74,11 +74,6 @@ class App extends Component {
             <Button bsStyle="primary" type="submit">
               Submit
             </Button>
-            <FormGroup>
-              {this.state.availableCourses.map(function (value) {
-                return <Checkbox inline>{value}</Checkbox>
-              })}
-            </FormGroup>
           </form>
           <Recipes recipeList={this.state.recipes} availableList={this.state.availableRecipes}/>
         </div>
