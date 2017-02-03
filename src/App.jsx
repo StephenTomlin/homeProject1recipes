@@ -25,22 +25,19 @@ class App extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.value != '') {
-      fetch(`http://api.yummly.com/v1/api/recipes?_app_id=448f67d9&_app_key=c21a694ca9204f51fa82d8ade53c791b&q=${this.state.value}&requirePictures=true`)
+      fetch('http://localhost:8080/api/recipes', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'SearchParams': this.state.value
+        }
+      })
       .then((response) => response.json())
       .then((responseJson) => {
-        this.setState({recipes:responseJson.matches});
+        let parsed = JSON.parse(responseJson)
+        this.setState({recipes: parsed.matches})
         console.log(this.state.recipes)
-      })
-    }
-  }
-  componentDidMount() {
-    if (this.state.available.length != 0) {
-      fetch(`http://api.yummly.com/v1/api/recipes?_app_id=448f67d9&_app_key=c21a694ca9204f51fa82d8ade53c791b&q=${this.state.available}&requirePictures=true`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({availableRecipes:responseJson.matches});
-        console.log(this.state.availableRecipes)
-      })
+        })
     }
     this.setState(
       {availableCourses:
@@ -49,6 +46,7 @@ class App extends Component {
       }
     );
   }
+
   render() {
     return (
       <div className = "container">
