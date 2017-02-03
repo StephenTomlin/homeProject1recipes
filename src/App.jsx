@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from './navBar.jsx';
 import Recipes from './recipeContainer.jsx';
-import { Button, FormGroup, Checkbox } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
@@ -9,9 +9,7 @@ class App extends Component {
     this.state = {value: '',
                   recipes:[],
                   available:[],
-                  availableRecipes:[],
-                  availableCourses:[],
-                  selectedCourses:[]
+                  availableRecipes:[]
                 };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,12 +37,6 @@ class App extends Component {
         console.log(this.state.recipes)
         })
     }
-    this.setState(
-      {availableCourses:
-        ["Main Dishes", "Desserts", "Side Dishes", "Lunch and Snacks", "Appetizers", "Salads",
-         "Breads", "Breakfast and Brunch", "Soups", "Beverages", "Condiments and Sauces", "Cocktails"]
-      }
-    );
   }
 
   render() {
@@ -60,11 +52,6 @@ class App extends Component {
             <Button bsStyle="primary" type="submit">
               Submit
             </Button>
-            <FormGroup>
-              {this.state.availableCourses.map(function (value) {
-                return <Checkbox inline>{value}</Checkbox>
-              })}
-            </FormGroup>
           </form>
           <Recipes recipeList={this.state.recipes} availableList={this.state.availableRecipes}/>
         </div>
