@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from './navBar.jsx';
 import Recipes from './recipeContainer.jsx';
-import { Button, FormGroup, Checkbox } from 'react-bootstrap';
+import { Button, FormGroup, Checkbox, Label } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +11,8 @@ class App extends Component {
                   available:[],
                   availableRecipes:[],
                   availableCourses:[],
-                  selectedCourses:[]
+                  selectedCourses:[],
+                  keywordList: ['egg', 'ham', 'pepper']
                 };
 
     this.handleChange = this.handleChange.bind(this);
@@ -19,6 +20,9 @@ class App extends Component {
   }
 
   handleChange(event) {
+    // var keywordList = this.state.keywordList.slice()
+    // keywordList.push(event.target.value)
+    // this.setState({keywordList: keywordList })
     this.setState({value: event.target.value});
   }
 
@@ -39,13 +43,19 @@ class App extends Component {
         console.log(this.state.recipes)
         })
     }
+    this.setState({keywordList: this.state.keywordList.concat([event.target.value]) })
+    console.log("Event.target.value :", event.target.value);
+  }
+
+  componentDidMount() {
     this.setState(
       {availableCourses:
         ["Main Dishes", "Desserts", "Side Dishes", "Lunch and Snacks", "Appetizers", "Salads",
-         "Breads", "Breakfast and Brunch", "Soups", "Beverages", "Condiments and Sauces", "Cocktails"]
+        "Breads", "Breakfast and Brunch", "Soups", "Beverages", "Condiments and Sauces", "Cocktails"]
       }
     );
   }
+
 
   render() {
     return (
@@ -57,6 +67,10 @@ class App extends Component {
               Search for Recipes
               <input type="text" value={this.state.value} onChange={this.handleChange} />
             </label>
+            {this.state.keywordList.map(function (value) {
+              return <span><Label>{value}</Label></span>
+            })}
+            <Label>New Label</Label>&nbsp;
             <Button bsStyle="primary" type="submit">
               Submit
             </Button>
