@@ -22,6 +22,7 @@ class Recipes extends Component {
                     <Media.Heading>
                       <h3 className="cardContents">{item.recipeName}</h3>
                     </Media.Heading>
+                    <h4 className="cardContents">{item.attributes.course}</h4>
                     <h4 className="cardContents">{item.totalTimeInSeconds}</h4>
                     <ul>
                       {item.ingredients.map(function (value) {
