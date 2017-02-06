@@ -11,7 +11,8 @@ const knexConfig = require("./knexfile");
 const knex       = require("knex")(knexConfig[ENV]);
 const knexLogger = require('knex-logger');
 
-const recipeSearchRoute = require("./routes/recipe.js")
+const recipeSearchRoute = require("./routes/recipe.js");
+const recipeSaveRoute   = require("./routes/recipeSave.js");
 
 app.use(function(req,res,next) {
   res.header("Access-Control-Allow-Origin", req.headers.origin);
@@ -19,12 +20,12 @@ app.use(function(req,res,next) {
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Headers", "Origin, SearchParams, X-Requested-With, Content-Type, Accept");
   next();
-
 })
 
 // Mount all resource routes
 
 app.use("/api/recipes", recipeSearchRoute)
+app.use("/api/recipeSave", recipeSaveRoute)
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
