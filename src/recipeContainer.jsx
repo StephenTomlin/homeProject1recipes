@@ -1,11 +1,25 @@
 import React, {Component} from 'react';
-import { Media } from 'react-bootstrap';
+import { Media, Button, Glyphicon } from 'react-bootstrap';
 
 class Recipes extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {starred: true};
+  }
   componentDidMount() {
     console.log(this.props.recipeList)
   }
   render() {
+
+    var starred = this.state.starred;
+    var star_icon = null;
+
+    if (this.state.starred) {
+      star_icon = <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
+    } else {
+      star_icon = <span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+    }
+
     return (
       <section>
         <h1>Recipe Directory</h1>
@@ -20,7 +34,11 @@ class Recipes extends Component {
                   </Media.Left>
                   <Media.Body>
                     <Media.Heading>
-                      <h3 className="cardContents">{item.recipeName}</h3>
+                      <h3 className="cardContents">
+                        { star_icon }
+                        {' '}
+                        {item.recipeName}
+                      </h3>
                     </Media.Heading>
                     <h4 className="cardContents">{item.attributes.course}</h4>
                     <h4 className="cardContents">{item.totalTimeInSeconds}</h4>
@@ -28,6 +46,7 @@ class Recipes extends Component {
                       {item.ingredients.map(function (value) {
                         return <li className="cardContents" key={value}>{value}</li>;
                       })}
+                    <Button bsStyle="success" bsSize="small"><Glyphicon glyph="star" /> Favourite </Button>
                     </ul>
                   </Media.Body>
                 </Media>

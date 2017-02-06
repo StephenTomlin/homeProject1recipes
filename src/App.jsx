@@ -26,6 +26,10 @@ class App extends Component {
     this.setState({value: event.target.value});
   }
 
+  handleEnter(event) {
+    console.log(event.target.value);
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.value != '') {
@@ -45,6 +49,8 @@ class App extends Component {
     }
     this.setState({keywordList: this.state.keywordList.concat([event.target.value]) })
     console.log("Event.target.value :", event.target.value);
+    console.log("Event.target :", event.target);
+    console.log("Event :", event);
   }
 
   componentDidMount() {
@@ -66,6 +72,7 @@ class App extends Component {
             <label>
               Search for Recipes
               <input type="text" value={this.state.value} onChange={this.handleChange} />
+              {/* <input type="text" value={this.state.value} onKeyDown={this.handleEnter} /> */}
             </label>
             {this.state.keywordList.map(function (value) {
               return <span><Label>{value}</Label></span>
