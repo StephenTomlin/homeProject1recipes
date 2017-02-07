@@ -37,7 +37,7 @@ app.use(function(req,res,next) {
 // Mount all resource routes
 
 app.use("/api/recipes", recipeSearchRoute)
-app.use("/api/recipeSave", recipeSaveRoute)
+// app.use("/api/recipeSave", recipeSaveRoute)
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
