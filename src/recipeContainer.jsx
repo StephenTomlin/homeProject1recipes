@@ -5,20 +5,32 @@ class Recipes extends Component {
   constructor(props) {
     super(props);
     this.state = {starred: true};
+    this.handleFavourite = this.handleFavourite.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.recipeList)
   }
+
+  handleFavourite(item) {
+    console.log(item)
+    event.preventDefault();
+    if (this.state.starred === true) {
+      fetch('http://localhost:8080/api/recipeSave', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          recipe: item
+        })
+      })
+    }
+  }
+
   render() {
 
     var starred = this.state.starred;
     var star_icon = null;
-
-    if (this.state.starred) {
-      star_icon = <span className="glyphicon glyphicon-star" aria-hidden="true"></span>
-    } else {
-      star_icon = <span className="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-    }
 
     return (
       <section>
@@ -35,7 +47,7 @@ class Recipes extends Component {
                   <Media.Body>
                     <Media.Heading>
                       <h3 className="cardContents">
-                        { star_icon }
+                        <span className="glyphicon glyphicon-star" aria-hidden="true" onClick={() => {this.handleFavourite(item)}}></span>
                         {' '}
                         {item.recipeName}
                       </h3>
@@ -46,13 +58,13 @@ class Recipes extends Component {
                       {item.ingredients.map(function (value) {
                         return <li className="cardContents" key={value}>{value}</li>;
                       })}
-                    <Button bsStyle="success" bsSize="small"><Glyphicon glyph="star" /> Favourite </Button>
+                    <Button bsStyle="success" bsSize="small" ><Glyphicon glyph="star" /> Favourite </Button>
                     </ul>
                   </Media.Body>
                 </Media>
               </div>
             </div>
-          ))}
+          ), this)}
         </section>
         </div>
         <h1>What You Can Make</h1>
