@@ -1,10 +1,10 @@
 
 exports.up = function(knex, Promise) {
   return Promise.all([
-  knex.schema.createTable('users', function(table){
-    table.increments('id');
-    table.string('name');
-    table.string('password');
+  knex.schema.createTableIfNotExists('users', function(table){
+    table.increments('userid');
+    table.string('username');
+    table.string('passwordhash');
   })
 ])
 };
