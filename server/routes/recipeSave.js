@@ -1,13 +1,13 @@
 "use strict";
 
 const express = require('express');
-const router  = require express.Router();
+const router  = express.Router();
 
 module.exports = (knex) => {
 
   router.post('/', (req, res) => {
-    knex('users').insert({
-
+    knex('favourites').insert({
+      fav_recipe: req.item
     })
   })
 }
