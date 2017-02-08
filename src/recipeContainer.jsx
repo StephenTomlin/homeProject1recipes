@@ -19,7 +19,8 @@ class Recipes extends Component {
     .then((response) => response.json())
     .then((responsejson) => console.log(responsejson))
   }
-
+  // this handles the unfavourite, it tells the backend to delete item(
+  // the recipe with the corresponding delete button)
   handleUnfavourite(item) {
     event.preventDefault();
     if (this.state.starred === false) {

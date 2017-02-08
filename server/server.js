@@ -15,6 +15,7 @@ const knexLogger = require('knex-logger');
 
 const recipeSearchRoute = require("./routes/recipe.js");
 const recipeSaveRoute   = require("./routes/recipeSave.js");
+const fridgeRoute       = require("./routes/fridge.js")
 
 // Load requirements
 const http = require('http');
@@ -43,7 +44,8 @@ app.use(function(req,res,next) {
 // Mount all resource routes
 
 app.use("/api/recipes", recipeSearchRoute);
-app.use("/api/recipeSave", recipeSaveRoute(knex))
+app.use("/api/recipeSave", recipeSaveRoute(knex));
+app.use("/api/fridge", fridgeRoute(knex));
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
