@@ -32,6 +32,8 @@ module.exports = (knex) => {
       id: 1,
       fav_recipe: req.header.searchparams
     })
+    .then((results) => {
+      res.json(results)
   })
 
   return router;

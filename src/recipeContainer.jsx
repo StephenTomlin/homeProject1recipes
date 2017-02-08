@@ -31,6 +31,8 @@ class Recipes extends Component {
           'SearchParams': item.id
         }
       })
+      .then((response) => response.json())
+      .then((responsejson) => console.log(responsejson))
     }
   }
 
