@@ -3,7 +3,12 @@ import Navbar from './navBar.jsx';
 import Recipes from './recipeContainer.jsx';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Checkbox, Label } from 'react-bootstrap';
 
+var app_id = "448f67d9";
+var app_key = "c21a694ca9204f51fa82d8ade53c791b";
+var url = "http://api.yummly.com/v1/api/recipes";
+
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = {query: '',
@@ -26,19 +31,20 @@ class App extends Component {
   }
 
   handleSubmit(event) {
+    var url_full = url + "?" + "_app_id=" + app_id + "&" + "_app_key=" + app_key
+                        + "&q=" + this.state.query
+    if (this.state.excludedIngredient != '') {
+      url_full = url_full + "&excludedIngredient[]=" + this.state.excludedIngredient
+    }
+    console.log('url_full: ', url_full);
     event.preventDefault();
+
     if (this.state.query != '') {
       fetch('http://localhost:8080/api/recipes', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'SearchParams':
-            {
-              'query': this.state.query,
-              'excludedIngredient': this.state.excludedIngredient
-            }
-          // 'SearchParams': this.state.query,
-          // 'excludedIngredientParams': this.state.excludedIngredient
+          'SearchParams': url_full
         }
       })
       .then((response) => response.json())
@@ -48,9 +54,6 @@ class App extends Component {
         console.log(this.state.recipes)
         })
     }
-    console.log("Event.target.value :", event.target.value);
-    console.log("Event.target :", event.target);
-    console.log("Event :", event);
   }
 
   render() {
