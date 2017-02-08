@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
                       + "&q=" + req.headers.searchparams['query']
                       + "&excludedIngredient[]=" + req.headers.searchparams['excludedIngredient']
 
-  request(url_full, function(error, response, body) {
+  request(req.headers.searchparams, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       // console.log(body);
       res.json(body);
