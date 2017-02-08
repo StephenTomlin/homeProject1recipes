@@ -24,6 +24,14 @@ module.exports = (knex) => {
     .then((results) => {
       res.json(results)
     })
+  }),
+
+  router.delete('/', (req, res) => {
+    knex('favourites')
+    .where({
+      id: 1,
+      fav_recipe: req.header.searchparams
+    })
   })
 
   return router;

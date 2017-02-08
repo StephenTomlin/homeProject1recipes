@@ -7,7 +7,31 @@ class Recipes extends Component {
     this.state = {starred: true};
     this.handleFavourite = this.handleFavourite.bind(this);
   }
+
+  // WHEN LOADED FAVOURITES ARE REQUESTED AND SERVED
   componentDidMount() {
+    fetch('http://localhost:8080/api/recipeSave', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => response.json())
+    .then((responsejson) => console.log(responsejson))
+  }
+
+  handleUnfavourite(item) {
+    event.preventDefault();
+    if (this.state.starred === false) {
+      fetch('http://localhost:8080/api/recipeSave', {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'SearchParams': item.id
+        }
+      })
+    }
   }
 
   handleFavourite(item) {
