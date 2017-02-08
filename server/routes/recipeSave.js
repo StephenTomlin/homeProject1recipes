@@ -6,11 +6,13 @@ const router  = express.Router();
 module.exports = (knex) => {
 
   router.post('/', (req, res) => {
-    console.log()
+    console.log(req.body.firstParam)
     knex('favourites')
     .insert({
-      id: 1,
       fav_recipe: req.body.firstParam
+    })
+    .then((results) => {
+      res.json(results)
     })
   })
 

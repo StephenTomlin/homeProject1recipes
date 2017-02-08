@@ -24,7 +24,11 @@ const http = require('http');
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
-app.use(bodyParser.json({ type: "application/json" }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
