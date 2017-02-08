@@ -11,7 +11,7 @@ class Recipes extends Component {
   }
 
   handleFavourite(item) {
-    console.log(JSON.stringify(item))
+    console.log(item)
     event.preventDefault();
     if (this.state.starred === true) {
       fetch('http://localhost:8080/api/recipeSave', {
@@ -21,7 +21,7 @@ class Recipes extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          firstParam: item.recipeName
+          firstParam: item.id
         })
       })
       .then((response) => {
