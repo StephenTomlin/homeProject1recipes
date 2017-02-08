@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Media, Button, Glyphicon } from 'react-bootstrap';
+import { Media, Glyphicon } from 'react-bootstrap';
+import { Grid, Row, Col, Thumbnail, Button } from 'react-bootstrap';
 
 class Recipes extends Component {
   constructor(props) {
@@ -31,58 +32,24 @@ class Recipes extends Component {
 
     var starred = this.state.starred;
     var star_icon = null;
-
+    var imageUrlSmall;
     return (
-      <section>
-        <h1>Recipe Directory</h1>
-        <div className = "row">
-        <section className="contain-recipes">
-          {this.props.recipeList.map((item,index)=>(
-            <div className ="rowStyle col-sm-4" value={item} key={index}>
-              <div className="recipeCard">
-                <Media>
-                  <Media.Left>
-                    <img className="cardContents" src={item.imageUrlsBySize[90]}/>
-                  </Media.Left>
-                  <Media.Body>
-                    <Media.Heading>
-                      <h3 className="cardContents">
-                        <span className="glyphicon glyphicon-star" aria-hidden="true" onClick={() => {this.handleFavourite(item)}}></span>
-                        {' '}
-                        {item.recipeName}
-                      </h3>
-                    </Media.Heading>
-                    <h4 className="cardContents">{item.attributes.course}</h4>
-                    <h4 className="cardContents">{item.totalTimeInSeconds}</h4>
-                    <ul>
-                      {item.ingredients.map(function (value) {
-                        return <li className="cardContents" key={value}>{value}</li>;
-                      })}
-                    <Button bsStyle="success" bsSize="small" ><Glyphicon glyph="star" /> Favourite </Button>
-                    </ul>
-                  </Media.Body>
-                </Media>
-              </div>
-            </div>
-          ), this)}
-        </section>
-        </div>
-        <h1>What You Can Make</h1>
-        <section className="available-recipes">
-        {this.props.availableList.map((item,index)=>(
-          <div className ="rowStyle" value={item} key={index}>
-            <div className="recipeCard">
-              <h3 className="cardContents">{item.recipeName}</h3>
-              <h4 className="cardContents">{item.totalTimeInSeconds}</h4>
-              <img className="cardContents" src={item.imageUrlsBySize[90]}/>
-              {item.ingredients.map(function (value) {
-                return <p className="cardContents" key={value}>{value}</p>;
-              })}
-            </div>
-          </div>
+      <Grid>
+        {this.props.recipeList.map((item,index)=>(
+          <Row>
+            <Col xs={6} md={4}>
+              <Thumbnail src={item.imageUrlsBySize[90]} alt="242x200">
+                <h3>Thumbnail label</h3>
+                <p>Description</p>
+                <p>
+                <Button bsStyle="primary">Button</Button>&nbsp;
+                <Button bsStyle="default">Button</Button>
+                </p>
+              </Thumbnail>
+            </Col>
+          </Row>
         ))}
-        </section>
-      </section>
+      </Grid>
     );
   }
 }

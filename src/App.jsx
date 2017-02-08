@@ -13,13 +13,15 @@ class App extends Component {
     super(props);
     this.state = {query: '',
                   excludedIngredient: '',
-                  recipes:[],
+                  recipes:[],  // recipes returned from Search Recipe API
+                  recipeDetails:[],  // recipes returned from Search Recipe API
                   availableRecipes: []
                 };
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
     this.handleExcludedIngredientChange = this.handleExcludedIngredientChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.callGetRecipeAPI = this.callGetRecipeAPI.bind(this);
   }
 
   handleQueryChange(event) {
@@ -31,12 +33,12 @@ class App extends Component {
   }
 
   handleSubmit(event) {
-    var url_full = url + "?" + "_app_id=" + app_id + "&" + "_app_key=" + app_key
+    var search_recipe_url = url + "?" + "_app_id=" + app_id + "&" + "_app_key=" + app_key
                         + "&q=" + this.state.query
     if (this.state.excludedIngredient != '') {
-      url_full = url_full + "&excludedIngredient[]=" + this.state.excludedIngredient
+      search_recipe_url = search_recipe_url + "&excludedIngredient[]=" + this.state.excludedIngredient
     }
-    console.log('url_full: ', url_full);
+    console.log('search_recipe_url: ', search_recipe_url);
     event.preventDefault();
 
     if (this.state.query != '') {
@@ -44,16 +46,51 @@ class App extends Component {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'SearchParams': url_full
+          'SearchParams': search_recipe_url
         }
       })
       .then((response) => response.json())
       .then((responseJson) => {
         let parsed = JSON.parse(responseJson)
+        console.log("search recipe parsed", parsed);
         this.setState({recipes: parsed.matches})
-        console.log(this.state.recipes)
+        console.log("this.state.recipes: ", this.state.recipes)
         })
+      .then(() => {
+        this.callGetRecipeAPI(this.state.recipes);
+        }
+      )
     }
+
+  }
+
+  callGetRecipeAPI(recipe){
+    var base_url = "http://api.yummly.com/v1/api/recipe/";
+    var get_recipe_url = "";
+    console.log("GetRecipeAPI is called");
+    console.log("recipe[0] is ", recipe[0]);
+
+    recipe.forEach(function(r) {
+        console.log(r.id);
+        get_recipe_url = base_url + r.id + "?" + "_app_id=" + app_id + "&" + "_app_key=" + app_key;
+        console.log(get_recipe_url);
+        fetch('http://localhost:8080/api/recipes', {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'SearchParams': get_recipe_url
+          }
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+          let parsed = JSON.parse(responseJson)
+          // this.setState({recipes: parsed.matches})
+          // console.log("this.state.recipes: ", this.state.recipes)
+          console.log("Get Recipe parsed", parsed );
+          console.log("Large photo", parsed.images[0].hostedLargeUrl );
+          this.setState({recipeDetails: parsed})
+          })
+    });
   }
 
   render() {
