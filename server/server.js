@@ -9,20 +9,22 @@ const app         = express();
 
 const knexConfig = require('./knexfile');
 const knex       = require('knex')(knexConfig[ENV]);
-const morgan     = require('morgan')
+const morgan     = require('morgan');
+const bodyParser  = require("body-parser");
 const knexLogger = require('knex-logger');
 
 const recipeSearchRoute = require("./routes/recipe.js");
 const recipeSaveRoute   = require("./routes/recipeSave.js");
 
 // Load requirements
-const http = require('http')
+const http = require('http');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
+app.use(bodyParser.json({ type: "application/json" }));
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
@@ -36,8 +38,8 @@ app.use(function(req,res,next) {
 
 // Mount all resource routes
 
-app.use("/api/recipes", recipeSearchRoute)
-// app.use("/api/recipeSave", recipeSaveRoute)
+app.use("/api/recipes", recipeSearchRoute);
+app.use("/api/recipeSave", recipeSaveRoute(knex))
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

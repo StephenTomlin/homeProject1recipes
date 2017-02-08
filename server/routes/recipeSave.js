@@ -1,4 +1,3 @@
-
 "use strict";
 
 const express = require('express');
@@ -7,8 +6,14 @@ const router  = express.Router();
 module.exports = (knex) => {
 
   router.post('/', (req, res) => {
-    knex('favourites').insert({
-      fav_recipe: req.item
+    console.log()
+    knex('favourites')
+    .insert({
+      id: 1,
+      fav_recipe: req.body.firstParam
     })
   })
+
+  return router;
 }
+

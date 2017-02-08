@@ -21,7 +21,7 @@ class Recipes extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          recipe: item
+          firstParam: item
         })
       })
     }
