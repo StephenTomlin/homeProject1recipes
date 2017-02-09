@@ -27,11 +27,13 @@ module.exports = (knex) => {
   }),
 
   router.delete('/', (req, res) => {
+    console.log(req.header)
     knex('fridge')
     .where({
       id: 1,
       ingredients: req.header.searchparams
     })
+    .del()
     .then((results) => {
       res.json(results)
     })

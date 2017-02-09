@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Label } from 'react-bootstrap';
+import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Checkbox, Label } from 'react-bootstrap';
+
+
 
 class fridge extends Component {
   constructor(props) {
@@ -15,6 +17,8 @@ class fridge extends Component {
     this.fetchFridgeItems = this.fetchFridgeItems.bind(this);
   }
 
+
+
   // when fridge component loads so does the contents of the fridge
   componentDidMount () {
     this.fetchFridgeItems();
@@ -29,6 +33,7 @@ class fridge extends Component {
     })
     .then((response) => response.json())
     .then((responsejson) => {
+
       console.log("frigde items: ", responsejson)
       this.setState({fridgeItems: responsejson})
     })
@@ -45,14 +50,17 @@ class fridge extends Component {
       body: JSON.stringify({
         firstParam: item
       })
-      }).then((response) => {
+      })
+      .then((response) => {
         return response.json()
     })
 
   }
 
-  // same thing as add ingredient but now removes it from the database
+  // same thing as add ingredient but now removes it from the database item should be a string
   handleIngredientDel (item) {
+    console.log(item)
+    event.preventDefault();
     fetch('http://localhost:8080/api/fridge', {
       method: 'DELETE',
       headers: {
@@ -60,9 +68,9 @@ class fridge extends Component {
         'Content-Type': 'application/json',
         'SearchParams': item
       }
+      })
       .then((response) => {
         return response.json()
-      })
     })
   }
 
@@ -84,6 +92,7 @@ class fridge extends Component {
     return (
       <div>
         <h2>fridge supplies go in here</h2>
+
         <Form horizontal onSubmit={this.handleSubmit}>
           <FormGroup controlId="queryBar">
             <Col componentClass={ControlLabel} sm={2}>
@@ -103,11 +112,23 @@ class fridge extends Component {
           </FormGroup>
         </Form>
 
-        {this.state.fridgeItems.map((item,index)=>(
-            <h3> {item.ingredients} </h3>
-        ))}
+
+
+          {this.state.fridgeItems.map((item,index)=>(
+          <Form horizontal onClick={() =>{this.handleIngredientDel(item.ingredients)}} >
+            <h3>{item.ingredients}</h3>
+            <FormGroup>
+              <Col smOffset={1} sm={10}>
+                <Button>
+                  Submit
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+          ))}
       </div>
     );
   }
 }
+
 export default fridge;
