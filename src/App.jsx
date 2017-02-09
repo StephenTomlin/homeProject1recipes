@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Navbar from './navBar.jsx';
 import Recipes from './recipeContainer.jsx';
-import fridge from './fridge.jsx';
+import Fridge from './fridge.jsx';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Checkbox, Label } from 'react-bootstrap';
 
 var app_id = "448f67d9";
@@ -99,7 +99,7 @@ class App extends Component {
             </FormGroup>
           </Form>
           <Recipes recipeList={this.state.recipes} availableList={this.state.availableRecipes}/>
-          <fridge/>
+          <Fridge/>
         </div>
       </div>
     );

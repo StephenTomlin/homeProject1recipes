@@ -31,7 +31,7 @@ class fridge extends Component {
     })
   }
 
-  // same thing as add ingredient but now removes it from the database
+  // same thing as add ingredient but now removes it from the database item should be a string
   handleIngredientDel (item) {
     fetch('http://localhost:8080/api/fridge', {
       method: 'DELETE',
@@ -52,3 +52,4 @@ class fridge extends Component {
     );
   }
 }
+export default fridge;
