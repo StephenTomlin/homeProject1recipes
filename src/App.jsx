@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navbar from './navBar.jsx';
 import Recipes from './recipeContainer.jsx';
 import Fridge from './fridge.jsx';
+// import Favourites from './favourites.jsx';
 import { Button, Form, FormGroup, FormControl, Col, ControlLabel, Checkbox, Label } from 'react-bootstrap';
 
 var app_id = "448f67d9";

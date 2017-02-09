@@ -21,21 +21,21 @@ class Recipes extends Component {
   }
   // this handles the unfavourite, it tells the backend to delete item(
   // the recipe with the corresponding delete button)
-  handleUnfavourite(item) {
-    event.preventDefault();
-    if (this.state.starred === false) {
-      fetch('http://localhost:8080/api/recipeSave', {
-        method: 'DELETE',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'SearchParams': item.id
-        }
-      })
-      .then((response) => response.json())
-      .then((responsejson) => console.log(responsejson))
-    }
-  }
+  // handleUnfavourite(item) {
+  //   event.preventDefault();
+  //   if (this.state.starred === false) {
+  //     fetch('http://localhost:8080/api/recipeSave', {
+  //       method: 'DELETE',
+  //       headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json',
+  //         'SearchParams': item.id
+  //       }
+  //     })
+  //     .then((response) => response.json())
+  //     .then((responsejson) => console.log(responsejson))
+  //   }
+  // }
 
   handleFavourite(item) {
     console.log(item)

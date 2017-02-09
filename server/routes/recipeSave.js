@@ -31,7 +31,7 @@ module.exports = (knex) => {
     .where({
       id: 1,
       fav_recipe: req.headers.searchparams
-    })
+    }).del()
     .then((results) => {
       res.json(results)
     })

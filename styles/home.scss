@@ -2,9 +2,12 @@ h1 {
   color: white;
 }
 body {
-  background-color: tomato;
+  background: url("https://image.freepik.com/free-photo/cutting-board-with-food_1112-372.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
-
 .recipeCard {
   background-color: gray;
   border: 2px solid black;
