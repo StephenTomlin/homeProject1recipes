@@ -10,6 +10,7 @@ class Recipes extends Component {
 
   // WHEN LOADED FAVOURITES ARE REQUESTED AND SERVED
   componentDidMount() {
+    console.log("this.props: ", this.props);
     fetch('http://localhost:8080/api/recipeSave', {
       headers: {
         'Accept': 'application/json',
@@ -88,7 +89,6 @@ class Recipes extends Component {
                       {item.ingredients.map(function (value) {
                         return <li className="cardContents" key={value}>{value}</li>;
                       })}
-                    <Button bsStyle="success" bsSize="small" >Add to Fridge </Button>
                     </ul>
                   </Media.Body>
                 </Media>

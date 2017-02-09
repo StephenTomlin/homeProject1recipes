@@ -68,23 +68,15 @@ class App extends Component {
           <Form horizontal onSubmit={this.handleSubmit}>
             <FormGroup controlId="queryBar">
               <Col componentClass={ControlLabel} sm={2}>
-                Recipe name contains:
+                <p> Recipe name contains: </p>
               </Col>
               <Col sm={4}>
                 <FormControl type="text" placeholder="Example: omelette" onChange={this.handleQueryChange} />
               </Col>
             </FormGroup>
-            <FormGroup controlId="allowedIngredientBar">
-              <Col componentClass={ControlLabel} sm={2}>
-                Ingredients contains:
-              </Col>
-              <Col sm={4}>
-                <FormControl type="text" placeholder="Example: egg pepper salt" />
-              </Col>
-            </FormGroup>
             <FormGroup controlId="excludedIngredientBar">
               <Col componentClass={ControlLabel} sm={2}>
-                Ingredients does NOT contain:
+                <p> Ingredients does NOT contain: </p>
               </Col>
               <Col sm={4}>
                 <FormControl type="text" placeholder="Example: onions" onChange={this.handleExcludedIngredientChange}/>
