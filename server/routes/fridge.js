@@ -10,7 +10,7 @@ module.exports = (knex) => {
     knex('fridge')
     .insert({
       id: 1,
-      ingredient: req.body.firstParam
+      ingredients: req.body.firstParam
     })
     .then((results) => {
       res.json(results)
@@ -30,7 +30,7 @@ module.exports = (knex) => {
     knex('fridge')
     .where({
       id: 1,
-      ingredient: req.header.searchparams
+      ingredients: req.header.searchparams
     })
     .then((results) => {
       res.json(results)
