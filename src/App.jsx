@@ -52,7 +52,7 @@ class App extends Component {
       .then((responseJson) => {
         let parsed = JSON.parse(responseJson)
         this.setState({recipes: parsed.matches})
-        console.log(this.state.recipes)
+        console.log("recipes returned from API", this.state.recipes)
         })
     }
   }

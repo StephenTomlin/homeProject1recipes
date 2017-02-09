@@ -17,7 +17,7 @@ class Recipes extends Component {
       }
     })
     .then((response) => response.json())
-    .then((responsejson) => console.log(responsejson))
+    .then((responsejson) => console.log('favourite recipes: ', responsejson))
   }
   // this handles the unfavourite, it tells the backend to delete item(
   // the recipe with the corresponding delete button)
@@ -88,7 +88,7 @@ class Recipes extends Component {
                       {item.ingredients.map(function (value) {
                         return <li className="cardContents" key={value}>{value}</li>;
                       })}
-                    <Button bsStyle="success" bsSize="small" ><Glyphicon glyph="star" /> Favourite </Button>
+                    <Button bsStyle="success" bsSize="small" >Add to Fridge </Button>
                     </ul>
                   </Media.Body>
                 </Media>
