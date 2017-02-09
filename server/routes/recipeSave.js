@@ -30,7 +30,7 @@ module.exports = (knex) => {
     knex('favourites')
     .where({
       id: 1,
-      fav_recipe: req.header.searchparams
+      fav_recipe: req.headers.searchparams
     })
     .then((results) => {
       res.json(results)

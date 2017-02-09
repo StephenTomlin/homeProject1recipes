@@ -39,6 +39,19 @@ class fridge extends Component {
     })
   }
 
+  componentDidUpdate () {
+    fetch('http://localhost:8080/api/fridge', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => response.json())
+    .then((responsejson) => {
+      this.setState({fridgeItems: responsejson})
+    })
+  }
+
 // handleIngredientAdd; adds the argument 'item' that the user inputs to the fridge table
   handleIngredientAdd (item) {
     fetch('http://localhost:8080/api/fridge', {
