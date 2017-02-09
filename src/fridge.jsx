@@ -17,7 +17,7 @@ class fridge extends Component {
 // handleIngredientAdd; adds the argument 'item' that the user inputs to the fridge table
   handleIngredientAdd (item) {
     fetch('http://localhost:8080/api/fridge', {
-      method: 'POST'
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
